@@ -3,11 +3,18 @@ from time import sleep
 
 
 def exibirMenu():
+    """
+       Exibe o menu principal com as opções disponíveis para o usuário.
+       """
     print('~' * 10, 'MENU', '~' * 10)
     print('[1] Adicionar nova despesa\n[2] Listar todas as despesas\n[3] Remover uma despesa\n[4] Editar uma despesa\n[5] Gerar relatório\n[6] Sair')
 
 
 def menu():
+    """
+      Controla o fluxo do programa, permitindo ao usuário interagir com as opções do menu.
+      Executa ações com base na escolha do usuário, como adicionar, listar, editar ou remover despesas.
+      """
     controle = Controle()
     while True:
         exibirMenu()

@@ -1,10 +1,24 @@
 from classes.despesa import Despesa
 class Controle():
+    """
+        Classe responsável por gerenciar o controle de despesas, incluindo funcionalidades
+        como adicionar, editar, remover, listar e gerar relatórios de despesas.
+        """
     def __init__(self):
+        """Inicializa o controle e carrega as despesas do arquivo."""
         self.controle = []
         self.carregarControle()
 
     def adicionarDespesa(self, descricao, valor, data, categoria):
+        """
+                Adiciona uma nova despesa ao controle.
+
+                Parâmetros:
+                descricao (str): Descrição da despesa.
+                valor (float): Valor da despesa.
+                data (str): Data da despesa.
+                categoria (str): Categoria da despesa.
+                """
         id =len(self.controle) + 1
         novaDespesa = Despesa(id, descricao, valor, data, categoria)
         self.controle.append(novaDespesa)
@@ -12,10 +26,12 @@ class Controle():
         print('Despesa adicionada com sucesso!')
 
     def salvarDespesa(self):
+        """Salva todas as despesas no arquivo texto."""
         arquivo= open('despesa.txt', 'w', encoding='UTF-8')
         for despesa in self.controle:
             arquivo.write(f'{despesa.id} | {despesa.descricao} | {despesa.valor} | {despesa.data} | {despesa.categoria}\n')
     def carregarControle(self):
+        """Carrega as despesas do arquivo texto para a memória."""
         import os
         if os.path.exists('despesa.txt'):
             arquivo = open('despesa.txt', 'r')
@@ -35,9 +51,16 @@ class Controle():
                 controle = Despesa(id, descricao, valor, data, categoria)
                 self.controle.append(controle)
     def listarDespesas(self):
+        """Exibe todas as despesas cadastradas."""
         for despesa in self.controle:
             print(f'ID: {despesa.id} |Nome: {despesa.descricao} |Valor: R${despesa.valor} |Data da compra: {despesa.data} |Categoria: {despesa.categoria}')
     def removerDespesa(self):
+        """
+               Remove uma despesa pelo ID.
+
+               Parâmetros:
+               id (int): ID da despesa a ser removida.
+               """
         if not self.controle:
             print('Nenhuma despesa cadastrada!')
         for despesa in self.controle:
@@ -53,6 +76,12 @@ class Controle():
                     print('Despesa removida com sucesso!')
                     break
     def editarDespesa(self):
+        """
+                Edita uma despesa existente com base no ID informado.
+
+                Parâmetros:
+                id (int): ID da despesa a ser editada.
+                """
         if not self.controle:
             print('Nenhuma despesa cadastrada!')
         for despesa in self.controle:
@@ -97,6 +126,7 @@ class Controle():
                             break
 
     def relatorio(self):
+        """Gera e exibe um relatório com estatísticas das despesas."""
         if not self.controle:
             print('Nenhuma despesa cadastrada')
             return
